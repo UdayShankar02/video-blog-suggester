@@ -3,6 +3,7 @@ import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2"
 import { nextCookies } from "better-auth/next-js"
 import { db } from "@/db/db"
 import * as schema from "@/db/schema"
+import { serverEnv } from "@/data/serverEnv"
 
 // Configure Better Auth with GitHub OAuth
 export const auth = betterAuth({
@@ -19,7 +20,7 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     },
   },
-
+  secret: serverEnv.BETTER_AUTH_SECRET,
   // Advanced settings
   advanced: {
     database: {
