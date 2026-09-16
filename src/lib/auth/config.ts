@@ -7,6 +7,8 @@ import { serverEnv } from "@/data/serverEnv"
 
 // Configure Better Auth with GitHub OAuth
 export const auth = betterAuth({
+  baseURL: serverEnv.BETTER_AUTH_URL,
+
   database: drizzleAdapter(db, {
     // Provide your Drizzle ORM instance here
     provider: "pg",
