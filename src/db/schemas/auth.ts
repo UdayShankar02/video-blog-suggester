@@ -46,7 +46,7 @@ export const session = pgTable(
 );
 
 export const account = pgTable(
-  "account",
+  "accounts",
   {
     id: uuid("id")
       .default(sql`pg_catalog.gen_random_uuid()`)
@@ -70,11 +70,11 @@ export const account = pgTable(
       .notNull(),
   },
   (table) => [
-    uniqueIndex("account_issuer_accountId_uidx").on(
+    uniqueIndex("accounts_issuer_accountId_uidx").on(
       table.issuer,
       table.accountId,
     ),
-    index("account_userId_idx").on(table.userId),
+    index("accounts_userId_idx").on(table.userId),
   ],
 );
 
@@ -115,7 +115,7 @@ export const authRelations = defineRelationsPart(
         to: r.user.id,
       }),
     },
-    account: {
+    accounts: {
       user: r.one.user({
         from: r.account.userId,
         to: r.user.id,
